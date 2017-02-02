@@ -23,7 +23,6 @@ export class SlService {
   authors: AuthorModel[];
   sl: SlModel[];
 
-
   constructor(public http: Http) {
     console.log('Hello SlService Provider');
   }

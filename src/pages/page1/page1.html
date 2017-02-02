@@ -17,11 +17,20 @@
   placeholder="Sök hållplats eller station">
 </ion-searchbar>
 
+<ion-list>
+   <ion-item-sliding *ngFor="#item of items" #slidingItem>
+     <ion-item *ngIf="item.deleted === false">{{item.name}} </ion-item>
+     <ion-item-options>
+       <button (click)="showEditModal(item, slidingItem)"><ion-icon name="create"></ion-icon>Bearbeiten</button>
+       <button danger (click)="doConfirm(item, slidingItem)"><ion-icon name="trash"></ion-icon>Löschen</button>
+     </ion-item-options>
+   </ion-item-sliding>
+ </ion-list>
+
   <button ion-button secondary (click)="getSlData()">Authors</button>
   <button ion-button secondary (click)="getTest()">SL</button>
 
-<ion-card *ngFor="let author of slService.authors">
- 
+    <ion-card *ngFor="let author of slService.authors">
       <ion-item>
         <ion-avatar item-left>
           <img src="https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/14600848_10153952809597467_3147410756184836420_n.jpg?oh=775cb196fb2e591d1452a70de92d4793&oe=5906E546" />
@@ -55,6 +64,6 @@
           </ion-note>
         </ion-col>
       </ion-row>
- 
     </ion-card>
+
 </ion-content>
