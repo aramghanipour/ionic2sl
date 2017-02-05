@@ -11,6 +11,7 @@ import { AuthorModel } from '../../app/models/author-model';
 })
 
 export class Page1 {
+  private searchString = "";
   private placeholder = "";
   constructor(public navCtrl: NavController, private slService: SlService) {
     
@@ -22,6 +23,10 @@ export class Page1 {
 
   getTest(){
     this.slService.getTestSl();
+  }
+
+  getAzure(){
+    this.slService.getAzure();
   }
 
   getSuggestedPlaces(searchString: string){

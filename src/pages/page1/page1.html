@@ -1,23 +1,23 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar dark>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Easierlife</ion-title>
+    <ion-title>
+      <ion-searchbar
+        [(ngModel)]="searchString"
+        (ionInput)="getSuggestedPlaces(searchString)"
+        placeholder="Sök hållplats eller station">
+      </ion-searchbar>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="page" padding>
   
-<ion-searchbar
-  [(ngModel)]="this.searchString"
-  [showCancelButton]="shouldShowCancel"
-  (ionInput)="getSuggestedPlaces(searchString)"
-  (ionCancel)="onCancel($event)"
-  placeholder="Sök hållplats eller station">
-</ion-searchbar>
 
-<ion-list>
+
+<!--<ion-list>
    <ion-item-sliding *ngFor="#item of items" #slidingItem>
      <ion-item *ngIf="item.deleted === false">{{item.name}} </ion-item>
      <ion-item-options>
@@ -25,45 +25,17 @@
        <button danger (click)="doConfirm(item, slidingItem)"><ion-icon name="trash"></ion-icon>Löschen</button>
      </ion-item-options>
    </ion-item-sliding>
- </ion-list>
+ </ion-list>-->
 
-  <button ion-button secondary (click)="getSlData()">Authors</button>
-  <button ion-button secondary (click)="getTest()">SL</button>
+  <!--<button ion-button full secondary (click)="getSlData()">Authors</button>-->
+  <button ion-button full secondary (click)="getAzure()">Azure SL</button>
+  
+  <!--<button ion-button full secondary (click)="getTest()">SL</button>-->
 
-    <ion-card *ngFor="let author of slService.authors">
-      <ion-item>
-        <ion-avatar item-left>
-          <img src="https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/14600848_10153952809597467_3147410756184836420_n.jpg?oh=775cb196fb2e591d1452a70de92d4793&oe=5906E546" />
-        </ion-avatar>
-        <h2><span>{{author.firstname}} {{author.lastname}}</span></h2>
-        <p>November 5, 1955</p>
+    <ion-card dark *ngFor="let fare of slService.fares" >
+      <ion-item (click)="slService.getPlace(fare.Name)">
+        <h2><span>{{fare.Name}}</span></h2>
       </ion-item>
- 
-      <img src="http://placehold.it/500x200" />
- 
-      <ion-card-content>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-      </ion-card-content>
- 
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 Likes</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="text"></ion-icon>
-            <div>4 Comments</div>
-          </button>
-        </ion-col>
-        <ion-col center text-center>
-          <ion-note>
-            11h ago
-          </ion-note>
-        </ion-col>
-      </ion-row>
     </ion-card>
 
 </ion-content>

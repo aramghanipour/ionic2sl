@@ -21,14 +21,23 @@ export class SlService {
 
   private authorsApiUrl = 'http://localhost/bookfinderapi/api/authors/getall';
   authors: AuthorModel[];
-  sl: SlModel[];
+  fares: SlModel[];
 
   constructor(public http: Http) {
     console.log('Hello SlService Provider');
   }
 
   getSuggestedPlaces(searchString: string){
-    var url = 'http://api.sl.se/api2/typeahead.json?key=' + this.slSuggestedPlacesApiKey +  '&searchstring=' + searchString + '&stationsonly=true&maxresults=10';
+    var url = 'http://fetchrwebapi.azurewebsites.net/sites/get/'+searchString;
+    return this.http.get(url)
+    .map((res: Response) => res.json() as any)
+    .subscribe(data => console.log(data),
+              err => console.log(err),
+              () => console.log("") as any);
+  }
+
+  getPlace(place: string){
+    var url = 'http://fetchrwebapi.azurewebsites.net/sites/get/'+place;
     return this.http.get(url)
     .map((res: Response) => res.json() as any)
     .subscribe(data => console.log(data),
@@ -42,6 +51,15 @@ export class SlService {
     .subscribe(data => console.log(data), 
                        err => console.log(err), 
                        () => console.log("")) as any;
+  }
+
+  getAzure(){
+    var loading = false;
+        return (this.http.get("http://fetchrwebapi.azurewebsites.net/sites/getall")
+    .map((res: Response) => res.json()) as any)
+    .subscribe(data => this.fares = data, 
+                       err => console.log(err), 
+                       () => console.log("")) as any, loading = false;
   }
 
   getAuthors(){

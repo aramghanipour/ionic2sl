@@ -1,3 +1,7 @@
 export class SlModel{
-    firstname: string;
+    name: string;
+    siteId: number;
+    longitude: number;
+    latitude: number;
+    siteType: string;
 }
